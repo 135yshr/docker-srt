@@ -1,16 +1,16 @@
-FROM ubuntu:18.04 as build
+FROM ubuntu:24.04 as build
 
 ARG branch=master
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y \
-    tclsh \
-    pkg-config \
-    cmake \
-    libssl-dev \
-    build-essential \
-    git \
+  tclsh \
+  pkg-config \
+  cmake \
+  libssl-dev \
+  build-essential \
+  git \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -21,10 +21,10 @@ WORKDIR /opt/srt
 
 RUN ./configure --prefix=/opt/local && make && make install
 
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 
 RUN apt-get update && apt-get install -y \
-    libssl-dev \
+  libssl-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
